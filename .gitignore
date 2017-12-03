@@ -1,0 +1,11 @@
+.vs
+*.log
+Debug
+Release
+design
+resources/images
+resources/fonts
+resources/sound
+lib
+include
+versions
