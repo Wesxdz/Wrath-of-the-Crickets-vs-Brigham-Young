@@ -10,6 +10,8 @@ public:
 	sf::Font heading;
 	sf::Text wealthCount;
 	sf::Sprite wealthIcon;
+	sf::Sprite roles;
+	sf::Sprite selectedRole;
 	cMultiplayerPlay* multiplayer;
 
 public:

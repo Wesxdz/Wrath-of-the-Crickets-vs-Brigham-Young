@@ -4,13 +4,14 @@
 #include <SFGUI/SFGUI.hpp>
 #include <SFGUI/Widgets.hpp>
 #include <string>
+struct Entity;
 struct Tile;
 
 namespace pk
 {
 
 	enum Type {
-		JOIN_GAME, PLAYER_JOIN, PLAYER_LEAVE, GAME_START, PLAYER_WEALTH_CHANGE, TILE_CHANGE
+		JOIN_GAME, PLAYER_JOIN, PLAYER_LEAVE, GAME_START, PLAYER_WEALTH_CHANGE, TILE_CHANGE, ENTITY_CHANGE
 	};
 
 	// ClientSession to HostSession
@@ -27,6 +28,18 @@ namespace pk
 		friend sf::Packet& operator<<(sf::Packet& pk, PlayerJoin& playerJoin);
 		friend sf::Packet& operator >>(sf::Packet& pk, PlayerJoin& playerJoin);
 	};
+
+	enum EntityChangeType {
+		CREATE, MOVE, DESTROY
+	};
+
+	struct EntityChange {
+		sf::Uint8 changeType;
+		std::shared_ptr<Entity> entity;
+		friend sf::Packet& operator<<(sf::Packet& pk, EntityChange& entityChange);
+		friend sf::Packet& operator >>(sf::Packet& pk, EntityChange& entityChange);
+	};
+
 
 	// Both
 	struct PlayerLeave {
@@ -53,8 +66,6 @@ namespace pk
 		friend sf::Packet& operator<<(sf::Packet& packet, TileChange& tileChange);
 		friend sf::Packet& operator >>(sf::Packet& packet, TileChange& tileChange);
 	};
-
-	// TODO: Entity create, move, destroy
 
 }
 

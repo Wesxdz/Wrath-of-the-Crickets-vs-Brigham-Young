@@ -3,6 +3,7 @@
 #include "cResources.h"
 #include "cMultiplayerPlay.h"
 #include "Packets.h"
+#include "cBoard.h"
 
 void Tile::Update(float dt)
 {
@@ -52,6 +53,7 @@ void Wheat::Draw(sf::Sprite & spritesheet)
 std::unique_ptr<Tile> Wheat::OnClick()
 {
 	auto multi = slGame::inst.currentState->entities["multi"]->GetComponent<cMultiplayerPlay>();
+	auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 	auto self = multi->GetSelf();
 	if (self->id == owner) {
 		switch (growthStage) {
@@ -74,6 +76,7 @@ std::unique_ptr<Tile> Wheat::OnClick()
 		pk::PlayerWealthChange info{ self->id, self->wealth };
 		packet << info;
 		multi->client->SendToHost(packet);
+		board->sounds["harvest"].play();
 	}
 	else if (growthStage == WheatGrowth::ROT) {
 		self->wealth += 1;
@@ -81,6 +84,7 @@ std::unique_ptr<Tile> Wheat::OnClick()
 		pk::PlayerWealthChange info{ self->id, self->wealth };
 		packet << info;
 		multi->client->SendToHost(packet);
+		board->sounds["harvest"].play();
 	}
 	else {
 		return nullptr;
@@ -99,11 +103,18 @@ void Rock::Draw(sf::Sprite & spritesheet)
 	slGame::inst.window->draw(spritesheet);
 }
 
+Dirt::Dirt()
+{
+	type = TileType::DIRT;
+}
+
 std::unique_ptr<Tile> Dirt::OnClick()
 {
 	auto multi = slGame::inst.currentState->entities["multi"]->GetComponent<cMultiplayerPlay>();
 	auto self = multi->GetSelf();
+	auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 	if (self->wealth >= 5) {
+		board->sounds["plant"].play();
 		self->wealth -= 5;
 		sf::Packet packet;
 		pk::PlayerWealthChange info{ self->id, self->wealth };
@@ -150,6 +161,9 @@ sf::Packet & operator>>(sf::Packet & packet, std::shared_ptr<Tile>& tile)
 		auto wheat = std::make_shared<Wheat>();
 		packet >> wheat->owner;
 		tile = wheat;
+	}
+	else {
+		tile = std::make_shared<Tile>();
 	}
 	tile->type = (TileType)type;
 	return packet;

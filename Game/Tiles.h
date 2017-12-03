@@ -2,12 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+#include <SFML/Audio.hpp>
 #include <memory>
 
 
 enum TileType
 {
-	DIRT, GRASS, ROCK, WHEAT
+	NONE, DIRT, GRASS, ROCK, WHEAT
 };
 
 struct Tile
@@ -22,6 +23,7 @@ struct Tile
 
 struct Dirt : public Tile
 {
+	Dirt();
 	virtual std::unique_ptr<Tile> OnClick();
 };
 

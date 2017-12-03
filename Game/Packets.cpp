@@ -1,5 +1,6 @@
 #include "Packets.h"
 #include "Tiles.h"
+#include "Entities.h"
 
 sf::Packet & pk::operator<<(sf::Packet & pk, JoinGame & joinGame)
 {
@@ -20,6 +21,16 @@ sf::Packet & pk::operator<<(sf::Packet & pk, PlayerJoin & playerJoin)
 sf::Packet & pk::operator>>(sf::Packet & pk, PlayerJoin & playerJoin)
 {
 	return pk >> playerJoin.id >> playerJoin.name;
+}
+
+sf::Packet & pk::operator<<(sf::Packet & pk, EntityChange& entityChange)
+{
+	return pk << sf::Uint8(6) << sf::Uint8(entityChange.changeType) << entityChange.entity;
+}
+
+sf::Packet & pk::operator>>(sf::Packet & pk, EntityChange& entityChange)
+{
+	return pk >> entityChange.changeType >> entityChange.entity;
 }
 
 sf::Packet & pk::operator<<(sf::Packet & packet, PlayerLeave & playerLeave)

@@ -7,11 +7,17 @@
 #include <memory>
 #include "Packets.h"
 
+enum PlayerRole 
+{
+	FARMER, ARSONIST, BIRDWATCHER, SCULPTOR
+};
+
 struct Player
 {
 	sf::Uint8 id;
 	std::string name;
 	int wealth;
+	PlayerRole role;
 };
 
 class cMultiplayerPlay : public slComponent
@@ -29,5 +35,10 @@ public:
 
 	void Broadcast(sf::Packet packet);
 	Player* GetSelf();
+	sf::Uint32 NextHandle();
+
+
+private:
+	sf::Uint32 nextHandle;
 };
 

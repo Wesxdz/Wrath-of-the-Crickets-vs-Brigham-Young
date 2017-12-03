@@ -101,7 +101,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>shoelace.lib;sfgui.lib;thor.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>shoelace.lib;sfgui.lib;thor.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;$(SolutionDir)../Subcivic/Release;</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <AdditionalOptions>/ENTRY:"mainCRTStartup" %(AdditionalOptions)</AdditionalOptions>
@@ -122,13 +122,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cBoard.cpp" />
+    <ClCompile Include="cEnemySpawner.cpp" />
     <ClCompile Include="cGuiTool.cpp" />
     <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="cMultiOptions.cpp" />
     <ClCompile Include="cMultiplayerSetup.cpp" />
     <ClCompile Include="cMultiplayerPlay.cpp" />
     <ClCompile Include="cUI.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Entities.cpp" />
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="HostSession.cpp" />
     <ClCompile Include="main.cpp" />
@@ -138,13 +139,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cBoard.h" />
+    <ClInclude Include="cEnemySpawner.h" />
     <ClInclude Include="cGuiTool.h" />
     <ClInclude Include="ClientSession.h" />
     <ClInclude Include="cMultiOptions.h" />
     <ClInclude Include="cMultiplayerSetup.h" />
     <ClInclude Include="cMultiplayerPlay.h" />
     <ClInclude Include="cUI.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entities.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="HostSession.h" />
     <ClInclude Include="Packets.h" />

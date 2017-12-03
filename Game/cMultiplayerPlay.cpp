@@ -1,5 +1,6 @@
 #include "cMultiplayerPlay.h"
 #include "cBoard.h"
+#include "cEnemySpawner.h"
 
 void cMultiplayerPlay::Init()
 {
@@ -43,6 +44,16 @@ void cMultiplayerPlay::Update(float dt)
 				send << info;
 				Broadcast(send);
 			}
+			else if (type == pk::ENTITY_CHANGE) {
+				pk::EntityChange info;
+				packet >> info;
+				if (info.entity->handle == 0) {
+					info.entity->handle = NextHandle();
+				}
+				sf::Packet send;
+				send << info;
+				Broadcast(send);
+			}
 		}
 	}
 	if (client) {
@@ -75,6 +86,30 @@ void cMultiplayerPlay::Update(float dt)
 				auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 				board->tiles[info.index.y][info.index.x] = info.tile;
 			}
+			else if (type == pk::ENTITY_CHANGE) {
+				pk::EntityChange info;
+				packet >> info;
+				auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
+				if (info.changeType == pk::EntityChangeType::CREATE) {
+					std::cout << "Entity Created with Handle " << info.entity->handle << "\n";
+					board->entities.push_back(info.entity);
+				}
+				else if (info.changeType == pk::EntityChangeType::DESTROY) {
+					auto it = std::find_if(board->entities.begin(), board->entities.end(), [&info](const std::shared_ptr<Entity>& entity) {
+						return entity->handle == info.entity->handle;
+					});
+					if (it != board->entities.end()) {
+						board->entities.erase(it);
+					}
+				}
+				else if (info.changeType == pk::EntityChangeType::MOVE) {
+					for (auto& entity : board->entities) {
+						if (entity->handle == info.entity->handle) {
+							entity->index = info.entity->index;
+						}
+					}
+				}
+			}
 		}
 	}
 }
@@ -98,4 +133,10 @@ Player* cMultiplayerPlay::GetSelf()
 		}
 	}
 	return nullptr;
+}
+
+sf::Uint32 cMultiplayerPlay::NextHandle()
+{
+	nextHandle++;
+	return nextHandle;
 }
