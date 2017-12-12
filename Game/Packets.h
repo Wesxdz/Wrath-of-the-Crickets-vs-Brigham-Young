@@ -50,7 +50,9 @@ namespace pk
 	};
 
 	struct GameStart {
-		friend sf::Packet& operator<<(sf::Packet& packet, GameStart& playerLeave);
+		sf::Uint64 seed;
+		friend sf::Packet& operator<<(sf::Packet& packet, GameStart& gameStart);
+		friend sf::Packet& operator >>(sf::Packet& packet, GameStart& gameStart);
 	};
 
 	struct PlayerWealthChange {

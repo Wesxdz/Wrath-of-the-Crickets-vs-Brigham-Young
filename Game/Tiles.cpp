@@ -22,7 +22,7 @@ Wheat::Wheat()
 {
 	type = TileType::WHEAT;
 	growthStage = WheatGrowth::PLANT;
-	timeToGrow = 10.0f;
+	timeToGrow = 5.0f;
 }
 
 void Wheat::Update(float dt)
@@ -31,7 +31,12 @@ void Wheat::Update(float dt)
 		timeToGrow -= dt;
 		if (timeToGrow <= 0) {
 			growthStage = (WheatGrowth)((int)growthStage + 1);
-			timeToGrow = 5.0f;
+			if (growthStage == WheatGrowth::FULL) {
+				timeToGrow = 8.0f;
+			}
+			else {
+				timeToGrow = 3.0f;
+			}
 		}
 	}
 }
@@ -58,19 +63,19 @@ std::unique_ptr<Tile> Wheat::OnClick()
 	if (self->id == owner) {
 		switch (growthStage) {
 		case WheatGrowth::SAP:
-			self->wealth += 1;
+			self->wealth += 2;
 			break;
 		case WheatGrowth::MID:
-			self->wealth += 3;
+			self->wealth += 4;
 			break;
 		case WheatGrowth::BIG:
-			self->wealth += 6;
+			self->wealth += 7;
 			break;
 		case WheatGrowth::FULL:
-			self->wealth += 10;
+			self->wealth += 12;
 			break;
 		case WheatGrowth::ROT:
-			self->wealth += 1;
+			self->wealth += 2;
 		}
 		sf::Packet packet;
 		pk::PlayerWealthChange info{ self->id, self->wealth };
@@ -114,7 +119,6 @@ std::unique_ptr<Tile> Dirt::OnClick()
 	auto self = multi->GetSelf();
 	auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 	if (self->wealth >= 5) {
-		board->sounds["plant"].play();
 		self->wealth -= 5;
 		sf::Packet packet;
 		pk::PlayerWealthChange info{ self->id, self->wealth };
@@ -162,9 +166,38 @@ sf::Packet & operator>>(sf::Packet & packet, std::shared_ptr<Tile>& tile)
 		packet >> wheat->owner;
 		tile = wheat;
 	}
+	else if (type == TileType::SCULPTURE) {
+		tile = std::make_shared<Sculpture>();
+	}
+	else if (type == TileType::CHARRED_WHEAT) {
+		tile = std::make_shared<CharredWheat>();
+	}
 	else {
 		tile = std::make_shared<Tile>();
 	}
 	tile->type = (TileType)type;
 	return packet;
+}
+
+Sculpture::Sculpture()
+{
+	type = TileType::SCULPTURE;
+}
+
+void Sculpture::Draw(sf::Sprite & spritesheet)
+{
+	spritesheet.setTextureRect({ 112, 0, 16, 32 });
+	spritesheet.move({ 0, -64 });
+	slGame::inst.window->draw(spritesheet);
+}
+
+CharredWheat::CharredWheat()
+{
+	type = TileType::CHARRED_WHEAT;
+}
+
+void CharredWheat::Draw(sf::Sprite & spritesheet)
+{
+	spritesheet.setTextureRect({ 96, 0, 16, 16 });
+	slGame::inst.window->draw(spritesheet);
 }

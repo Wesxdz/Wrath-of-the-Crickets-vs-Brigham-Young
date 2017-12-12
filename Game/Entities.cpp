@@ -126,14 +126,51 @@ void Seagull::OnTurn()
 Fire::Fire()
 {
 	type = EntityType::FIRE;
+	entities.setTextureRect({ 48, 0, 16, 16 });
+	timeToNextTurn = 0.5f;
+	turnSpeed = 1.f;
 }
 
 void Fire::Draw()
 {
+	entities.setPosition(index.x * 64.f, index.y * 64.f);
+	slGame::inst.window->draw(entities);
 }
 
 void Fire::OnTurn()
 {
+	auto multi = slGame::inst.currentState->entities["multi"]->GetComponent<cMultiplayerPlay>();
+	auto nearby = GetAdjacent();
+	sf::Packet packet;
+	auto burtTile = board->tiles[index.y][index.x];
+	if (burtTile->type == TileType::GRASS) {
+		pk::TileChange remains{ index, std::make_shared<Dirt>() };
+		packet << remains;
+	}
+	else if (burtTile->type == TileType::WHEAT) {
+		if (static_cast<Wheat*>(burtTile.get())->growthStage != WheatGrowth::PLANT) {
+			pk::TileChange remains{ index, std::make_shared<CharredWheat>() };
+			packet << remains;
+		}
+	}
+	pk::EntityChange burnout{ pk::EntityChangeType::DESTROY, std::make_shared<Fire>(*this) };
+	packet << burnout;
+	for (auto entity : board->entities) {
+		if (entity->type == EntityType::CRICKET && index == entity->index) {
+			pk::EntityChange kill{ pk::EntityChangeType::DESTROY, entity };
+			packet << kill;
+		}
+	}
+	for (auto tilePlacement : nearby) {
+		if (tilePlacement.tile->type == TileType::GRASS || 
+			tilePlacement.tile->type == TileType::WHEAT && static_cast<Wheat*>(tilePlacement.tile.get())->growthStage != WheatGrowth::PLANT) {
+			auto fire = std::make_shared<Fire>();
+			fire->index = tilePlacement.index;
+			pk::EntityChange spread{ pk::EntityChangeType::CREATE, fire };
+			packet << spread;
+		}
+	}
+	multi->Broadcast(packet);
 }
 
 sf::Packet& operator<<(sf::Packet& pk, std::shared_ptr<Entity>& entity) {

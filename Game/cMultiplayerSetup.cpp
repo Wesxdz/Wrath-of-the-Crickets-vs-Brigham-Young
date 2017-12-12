@@ -57,8 +57,9 @@ void cMultiplayerSetup::Update(float dt)
 				next = new Gameplay;
 				auto multiPlay = new cMultiplayerPlay;
 				next->multiplayer = multiPlay;
-				sf::Packet p;
 				pk::GameStart info;
+				packet >> info;
+				sf::Packet p;
 				p << info;
 				Broadcast(p);
 				multiPlay->host = std::move(host);
@@ -110,6 +111,9 @@ void cMultiplayerSetup::Update(float dt)
 				}
 			}
 			else if (type == pk::GAME_START) {
+				pk::GameStart startInfo;
+				packet >> startInfo;
+				srand(startInfo.seed);
 				pk::PlayerJoin info{ client->info.id, client->info.name };
 				sf::Packet send;
 				send << info;

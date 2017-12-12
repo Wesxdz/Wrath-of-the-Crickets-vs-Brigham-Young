@@ -40,6 +40,9 @@ void cMultiplayerPlay::Update(float dt)
 			else if (type == pk::TILE_CHANGE) {
 				pk::TileChange info;
 				packet >> info;
+				if (info.tile->type == TileType::SCULPTURE) {
+					GetSiblingComponent<cEnemySpawner>()->enabled = false;
+				}
 				sf::Packet send;
 				send << info;
 				Broadcast(send);
@@ -57,6 +60,7 @@ void cMultiplayerPlay::Update(float dt)
 		}
 	}
 	if (client) {
+		auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 		sf::Packet packet;
 		sf::IpAddress ipRec = client->hostIP;
 		sf::Uint16 portRec = client->hostPort;
@@ -83,7 +87,12 @@ void cMultiplayerPlay::Update(float dt)
 			else if (type == pk::TILE_CHANGE) {
 				pk::TileChange info;
 				packet >> info;
-				auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
+				if (info.tile->type == TileType::SCULPTURE) {
+					board->sounds["build_statue"].play();
+				}
+				else if (info.tile->type == TileType::WHEAT) {
+					board->sounds["plant"].play();
+				}
 				board->tiles[info.index.y][info.index.x] = info.tile;
 			}
 			else if (type == pk::ENTITY_CHANGE) {
@@ -91,10 +100,24 @@ void cMultiplayerPlay::Update(float dt)
 				packet >> info;
 				auto board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 				if (info.changeType == pk::EntityChangeType::CREATE) {
+					if (info.entity->type == EntityType::CRICKET) {
+						board->sounds["cricket_spawn"].play();
+					}
+					else if (info.entity->type == EntityType::SEAGULL) {
+						board->sounds["bird_spawn"].play();
+					}
+					else if (info.entity->type == EntityType::FIRE) {
+						if (board->sounds["fire_sprea"].getStatus() != sf::Sound::Status::Playing) {
+							board->sounds["fire_spread"].play();
+						}
+					}
 					std::cout << "Entity Created with Handle " << info.entity->handle << "\n";
 					board->entities.push_back(info.entity);
 				}
 				else if (info.changeType == pk::EntityChangeType::DESTROY) {
+					if (info.entity->type == EntityType::CRICKET) {
+						board->sounds["cricket_die"].play();
+					}
 					auto it = std::find_if(board->entities.begin(), board->entities.end(), [&info](const std::shared_ptr<Entity>& entity) {
 						return entity->handle == info.entity->handle;
 					});

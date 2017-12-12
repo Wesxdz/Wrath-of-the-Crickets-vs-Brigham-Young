@@ -57,9 +57,11 @@ void cMultiOptions::Init()
 			start->GetSignal(sfg::Button::OnLeftClick).Connect([this]() {
 				sf::Packet p;
 				pk::GameStart info;
+				info.seed = time(NULL);
 				p << info;
-				multiplayer->client->socket.send(p, multiplayer->client->hostIP, multiplayer->client->hostPort);
+				multiplayer->client->SendToHost(p);
 			});
+			hostWindow->SetPosition({ 1280 - hostWindow->GetRequisition().x, 0.f });
 		}
 	});
 	join->GetSignal(sfg::Button::OnLeftClick).Connect([this, enterIP, enterPort] {

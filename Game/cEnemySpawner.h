@@ -15,6 +15,7 @@ public:
 	float difficulty;
 	float points;
 	std::vector<sf::Vector2i> possibleSpawns;
+	bool enabled = true;
 
 public:
 	// Inherited via slComponent

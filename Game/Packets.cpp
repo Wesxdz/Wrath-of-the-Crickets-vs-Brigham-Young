@@ -43,9 +43,14 @@ sf::Packet & pk::operator>>(sf::Packet & packet, PlayerLeave & playerLeave)
 	return packet >> playerLeave.id >> playerLeave.name;
 }
 
-sf::Packet & pk::operator<<(sf::Packet & packet, GameStart & playerLeave)
+sf::Packet & pk::operator<<(sf::Packet & packet, GameStart & gameStart)
 {
-	return packet << sf::Uint8(3);
+	return packet << sf::Uint8(3) << gameStart.seed;
+}
+
+sf::Packet & pk::operator>>(sf::Packet & packet, GameStart & gameStart)
+{
+	return packet >> gameStart.seed;
 }
 
 sf::Packet & pk::operator<<(sf::Packet & packet, PlayerWealthChange & playerWealthChange)

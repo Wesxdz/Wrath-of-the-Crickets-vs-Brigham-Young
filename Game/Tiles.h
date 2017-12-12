@@ -8,7 +8,7 @@
 
 enum TileType
 {
-	NONE, DIRT, GRASS, ROCK, WHEAT
+	NONE, DIRT, GRASS, ROCK, WHEAT, SCULPTURE, CHARRED_WHEAT
 };
 
 struct Tile
@@ -46,13 +46,25 @@ struct Rock : public Tile
 {
 	int variation;
 	Rock();
-	virtual void Draw(sf::Sprite& spritesheet);
+	virtual void Draw(sf::Sprite& spritesheet) override;
 };
 
 struct Grass : public Dirt
 {
 	Grass();
 	int variation;
-	virtual void Draw(sf::Sprite& spritesheet);
+	virtual void Draw(sf::Sprite& spritesheet) override;
+};
+
+struct Sculpture : public Tile
+{
+	Sculpture();
+	virtual void Draw(sf::Sprite& spritesheet) override;
+};
+
+struct CharredWheat : public Tile
+{
+	CharredWheat();
+	virtual void Draw(sf::Sprite& spritesheet) override;
 };
 

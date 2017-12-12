@@ -9,7 +9,7 @@ void cEnemySpawner::Init()
 {
 	if (GetSiblingComponent<cMultiplayerPlay>()->host) {
 		Reg(slRegister::UPDATE);
-		difficulty = 10;
+		difficulty = 30;
 		board = slGame::inst.currentState->entities["scene"]->GetComponent<cBoard>();
 		for (int row = 0; row < board->tiles.size(); row++) {
 			for (int col = 0; col < board->tiles[row].size(); col++) {
@@ -30,17 +30,19 @@ bool cEnemySpawner::Input(sf::Event * e)
 
 void cEnemySpawner::Update(float dt)
 {
-	for (int row = 0; row < board->tiles.size(); row++) {
-		for (int col = 0; col < board->tiles[row].size(); col++) {
-			std::shared_ptr<Tile> tile = board->tiles[row][col];
-			if (tile->type == TileType::WHEAT) { // More wheat implies we should spawn more crickets
-				points += dt;
+	if (enabled) {
+		for (int row = 0; row < board->tiles.size(); row++) {
+			for (int col = 0; col < board->tiles[row].size(); col++) {
+				std::shared_ptr<Tile> tile = board->tiles[row][col];
+				if (tile->type == TileType::WHEAT) { // More wheat implies we should spawn more crickets
+					points += dt;
+				}
 			}
 		}
-	}
-	while (points >= difficulty) {
-		points -= difficulty;
-		Spawn(std::make_shared<Cricket>());
+		while (points >= difficulty) {
+			points -= difficulty;
+			Spawn(std::make_shared<Cricket>());
+		}
 	}
 }
 
