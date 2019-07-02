@@ -2,7 +2,6 @@
 
 #include "cResources.h"
 #include "slComponent.h"
-#include "cWorld.h"
 
 slGame slGame::inst;
 

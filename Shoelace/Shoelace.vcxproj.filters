@@ -23,12 +23,6 @@
     <ClInclude Include="slGameState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SFMLDebugDraw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cWorld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cSceneControls.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -50,12 +44,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="slGameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLDebugDraw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cSceneControls.cpp">

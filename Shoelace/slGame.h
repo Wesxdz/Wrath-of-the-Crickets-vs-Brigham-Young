@@ -1,9 +1,7 @@
 #pragma once
 
 #include "slGameState.h"
-#include "SFMLDebugDraw.h"
 
-#include <Box2D/Box2D.h>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <Thor/Resources.hpp>

@@ -21,8 +21,6 @@
   <ItemGroup>
     <ClInclude Include="cResources.h" />
     <ClInclude Include="cSceneControls.h" />
-    <ClInclude Include="cWorld.h" />
-    <ClInclude Include="SFMLDebugDraw.h" />
     <ClInclude Include="slComponent.h" />
     <ClInclude Include="slEntity.h" />
     <ClInclude Include="slGame.h" />
@@ -32,8 +30,6 @@
   <ItemGroup>
     <ClCompile Include="cResources.cpp" />
     <ClCompile Include="cSceneControls.cpp" />
-    <ClCompile Include="cWorld.cpp" />
-    <ClCompile Include="SFMLDebugDraw.cpp" />
     <ClCompile Include="slComponent.cpp" />
     <ClCompile Include="slEntity.cpp" />
     <ClCompile Include="slGame.cpp" />
