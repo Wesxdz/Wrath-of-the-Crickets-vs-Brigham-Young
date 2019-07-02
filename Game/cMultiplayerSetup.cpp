@@ -5,9 +5,49 @@
 
 #include "cMultiOptions.h"
 
+#include <Discord/discord.h>
+
 void cMultiplayerSetup::Init()
 {
 	Reg(slRegister::UPDATE);
+
+	auto result = discord::Core::Create(client_id, DiscordCreateFlags_Default, &core);
+	std::cout << "Discord Core Created: " << (int)result << std::endl;
+
+	if (core) {
+		core->SetLogHook(discord::LogLevel::Debug, [](discord::LogLevel level, const char* data) {
+			std::cerr << "Log(" << static_cast<uint32_t>(level) << "): " << data << "\n";
+		});
+
+		// ALL DISCORD OBJECTS SHOULD BE DEFAULT INITIALIZED (aka do {} when creating them)
+		discord::Activity activity;
+
+		// Application ID, Read Only
+		//activity.SetApplicationId(0); 
+
+		// Application Name, Read Only
+		//activity.SetName("Playing Wesley's Game"); 
+
+		// Activity Type, Playing, Streaming, Watching, etc.
+		activity.SetType(discord::ActivityType::Playing);
+
+		// Details
+		activity.SetDetails("Yeah, I'm playing");
+
+		// Whether this Activity is instanced, like a specific group
+		//activity.SetInstance(false); 
+
+		// Party Status
+		activity.SetState("Looking for People"); 
+
+		// Allows changing Assets like Images
+		activity.GetAssets().SetSmallText("Hi"); 
+
+		core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {
+			std::cout << ((result == discord::Result::Ok) ? "Succeeded" : "Failed")
+				<< " updating activity!\n";
+		});
+	}
 }
 
 bool cMultiplayerSetup::Input(sf::Event * e)
@@ -17,6 +57,9 @@ bool cMultiplayerSetup::Input(sf::Event * e)
 
 void cMultiplayerSetup::Update(float dt)
 {
+	if (core) {
+		core->RunCallbacks();
+	}
 	if (host) {
 		sf::Packet packet;
 		sf::IpAddress clientIp;

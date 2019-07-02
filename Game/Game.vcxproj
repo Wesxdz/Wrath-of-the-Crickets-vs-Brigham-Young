@@ -78,7 +78,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)/Shoelace;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>steam_api.lib;shoelace.lib;sfgui-d.lib;thor-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>steam_api.lib;shoelace.lib;discord_game_sdk.dll.lib;sfgui-d.lib;thor-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;$(SolutionDir)../Subcivic/Debug;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -101,9 +101,9 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>steam_api.lib;shoelace.lib;sfgui.lib;thor.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>steam_api.lib;shoelace.lib;discord_game_sdk.dll.lib;sfgui.lib;thor.lib;sfml-audio.lib;sfml-network.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)lib;$(SolutionDir)../Subcivic/Release;</AdditionalLibraryDirectories>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <AdditionalOptions>/ENTRY:"mainCRTStartup" %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -129,6 +129,20 @@
     <ClCompile Include="cMultiplayerSetup.cpp" />
     <ClCompile Include="cMultiplayerPlay.cpp" />
     <ClCompile Include="cUI.cpp" />
+    <ClCompile Include="Discord\achievement_manager.cpp" />
+    <ClCompile Include="Discord\activity_manager.cpp" />
+    <ClCompile Include="Discord\application_manager.cpp" />
+    <ClCompile Include="Discord\core.cpp" />
+    <ClCompile Include="Discord\image_manager.cpp" />
+    <ClCompile Include="Discord\lobby_manager.cpp" />
+    <ClCompile Include="Discord\network_manager.cpp" />
+    <ClCompile Include="Discord\overlay_manager.cpp" />
+    <ClCompile Include="Discord\relationship_manager.cpp" />
+    <ClCompile Include="Discord\storage_manager.cpp" />
+    <ClCompile Include="Discord\store_manager.cpp" />
+    <ClCompile Include="Discord\types.cpp" />
+    <ClCompile Include="Discord\user_manager.cpp" />
+    <ClCompile Include="Discord\voice_manager.cpp" />
     <ClCompile Include="Entities.cpp" />
     <ClCompile Include="Gameplay.cpp" />
     <ClCompile Include="HostSession.cpp" />
