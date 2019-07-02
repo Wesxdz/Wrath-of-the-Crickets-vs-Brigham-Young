@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{90D23A39-D7A5-4CFA-AD00-A6D732F67644}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shoelace", "..\Subcivic\Shoelace\Shoelace.vcxproj", "{D61EB66A-9311-4DEA-8152-AD1D6CA60204}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shoelace", "Shoelace\Shoelace.vcxproj", "{D61EB66A-9311-4DEA-8152-AD1D6CA60204}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

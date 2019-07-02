@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)../Subcivic/Shoelace;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)/Shoelace;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>steam_api.lib;shoelace.lib;sfgui-d.lib;thor-d.lib;sfml-audio-d.lib;sfml-network-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -96,7 +96,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)../Subcivic/Shoelace;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)/Shoelace;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -152,6 +152,11 @@
     <ClInclude Include="Packets.h" />
     <ClInclude Include="Setup.h" />
     <ClInclude Include="Tiles.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shoelace\Shoelace.vcxproj">
+      <Project>{d61eb66a-9311-4dea-8152-ad1d6ca60204}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
