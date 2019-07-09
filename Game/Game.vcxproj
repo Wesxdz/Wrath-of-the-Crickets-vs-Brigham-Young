@@ -129,6 +129,7 @@
     <ClCompile Include="cMultiplayerSetup.cpp" />
     <ClCompile Include="cMultiplayerPlay.cpp" />
     <ClCompile Include="cUI.cpp" />
+    <ClCompile Include="DiscordManager.cpp" />
     <ClCompile Include="Discord\achievement_manager.cpp" />
     <ClCompile Include="Discord\activity_manager.cpp" />
     <ClCompile Include="Discord\application_manager.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="cMultiplayerSetup.h" />
     <ClInclude Include="cMultiplayerPlay.h" />
     <ClInclude Include="cUI.h" />
+    <ClInclude Include="DiscordManager.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="Gameplay.h" />
     <ClInclude Include="HostSession.h" />
