@@ -3,6 +3,7 @@
 #include "cMultiOptions.h"
 #include "cSceneControls.h"
 #include "cMultiplayerSetup.h"
+#include "DiscordManager.h"
 
 Setup::Setup()
 {
@@ -24,6 +25,10 @@ void Setup::Init()
 	auto multi = new slEntity();
 	multi->AddComponent(new cMultiplayerSetup);
 	entities["multi"] = multi;
+
+	auto discord = new slEntity();
+	discord->AddComponent(new DiscordManager);
+	entities["discord"] = discord;
 
 	slGame::inst.window->resetGLStates();
 	auto gui = new slEntity();

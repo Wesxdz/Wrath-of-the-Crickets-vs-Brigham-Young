@@ -22,6 +22,7 @@ public:
 	sf::Clock clock;
 	float targetFrameRate;
 	cResources* resources;
+	sf::String path;
 
 public:
 	static void Init(const char* name, int width, int height);

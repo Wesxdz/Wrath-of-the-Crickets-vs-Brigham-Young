@@ -20,10 +20,6 @@ public:
 	cMultiOptions* options;
 	Gameplay* next = nullptr;
 
-	// Discord
-	discord::ClientId client_id{595486295137189890};
-	discord::Core* core{};
-
 public:
 	// Inherited via slComponent
 	virtual void Init() override;
