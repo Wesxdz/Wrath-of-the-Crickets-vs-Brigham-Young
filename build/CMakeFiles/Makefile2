@@ -157,7 +157,7 @@ deps/SFGUI/examples/clean: deps/SFGUI/examples/CMakeFiles/CustomWidget.dir/clean
 # Target rules for target CMakeFiles/wotcvby.dir
 
 # All Build rule for target.
-CMakeFiles/wotcvby.dir/all:
+CMakeFiles/wotcvby.dir/all: deps/SFGUI/CMakeFiles/SFGUI.dir/all
 	$(MAKE) -f CMakeFiles/wotcvby.dir/build.make CMakeFiles/wotcvby.dir/depend
 	$(MAKE) -f CMakeFiles/wotcvby.dir/build.make CMakeFiles/wotcvby.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/CMakeFiles --progress-num=85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100 "Built target wotcvby"
@@ -165,7 +165,7 @@ CMakeFiles/wotcvby.dir/all:
 
 # Build rule for subdir invocation for target.
 CMakeFiles/wotcvby.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/CMakeFiles 69
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/wotcvby.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/CMakeFiles 0
 .PHONY : CMakeFiles/wotcvby.dir/rule

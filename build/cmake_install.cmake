@@ -38,9 +38,8 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
+  # Include the install script for the subdirectory.
   include("/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/deps/SFGUI/cmake_install.cmake")
-
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

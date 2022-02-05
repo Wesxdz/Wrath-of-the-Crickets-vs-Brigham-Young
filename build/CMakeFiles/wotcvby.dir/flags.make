@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/src -I/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/include 
+CXX_INCLUDES = -I/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/src -I/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/include -I/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/deps/SFGUI/include 
 

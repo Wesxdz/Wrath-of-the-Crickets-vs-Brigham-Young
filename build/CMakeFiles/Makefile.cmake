@@ -49,6 +49,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/share/cmake-3.16/Modules/Platform/Linux-GNU.cmake"
   "/usr/local/share/cmake-3.16/Modules/Platform/Linux.cmake"
   "/usr/local/share/cmake-3.16/Modules/Platform/UnixPaths.cmake"
+  "/usr/local/share/cmake-3.16/Modules/SelectLibraryConfigurations.cmake"
   "/usr/local/share/cmake-3.16/Modules/WriteBasicConfigVersionFile.cmake"
   )
 

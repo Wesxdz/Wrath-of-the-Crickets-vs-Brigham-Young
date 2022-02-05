@@ -34,10 +34,12 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../src"
   "../include"
+  "../deps/SFGUI/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/aeri/projects/Wrath-of-the-Crickets-vs-Brigham-Young/build/deps/SFGUI/CMakeFiles/SFGUI.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
